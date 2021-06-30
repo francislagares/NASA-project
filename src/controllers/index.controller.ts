@@ -1,10 +1,8 @@
+import path from 'path';
 import { Request, Response } from 'express';
 
 function get(req: Request, res: Response): void {
-  res.json({
-    status: 200,
-    message: 'Welcome to the home page',
-  });
+  res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 }
 
 export default {
