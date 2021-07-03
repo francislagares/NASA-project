@@ -21,8 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 // Routes...
-app.use('/*', indexRouter);
 app.use(planetsRouter);
 app.use(launchesRouter);
+app.use('/*', indexRouter);
 
 export { app };

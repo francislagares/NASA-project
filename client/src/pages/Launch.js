@@ -13,7 +13,6 @@ const Launch = props => {
       let planet = planets[key][index];
       formattedPlanets.push(planet)
     }
-    console.log(formattedPlanets)
   }
 
     return formattedPlanets?.map(planet => 
