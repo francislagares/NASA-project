@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { launches } from '../models/launches.model';
+import { getAllLaunches } from '../models/launches.model';
 
-function getAllLaunches(req: Request, res: Response): void {
-  res.status(200).json(Array.from(launches.values()));
+function httpGetAllLaunches(req: Request, res: Response): void {
+  res.status(200).json(getAllLaunches());
 }
 
-export { getAllLaunches };
+export { httpGetAllLaunches };

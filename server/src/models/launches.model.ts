@@ -1,3 +1,5 @@
+import { ILaunches } from 'types/launches';
+
 const launches = new Map();
 
 const launch = {
@@ -13,4 +15,8 @@ const launch = {
 
 launches.set(launch.flightNumber, launch);
 
-export { launches };
+function getAllLaunches(): ILaunches[] {
+  return Array.from(launches.values());
+}
+
+export { getAllLaunches };
