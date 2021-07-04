@@ -45,7 +45,11 @@ export function loadPlanetsData(): Promise<void> {
   });
 }
 
-export default {
+export function getAllPlanets(): string[] {
+  return habitablePlanets;
+}
+
+module.exports = {
   loadPlanetsData,
-  planets: habitablePlanets,
+  getAllPlanets,
 };
