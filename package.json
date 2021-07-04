@@ -19,7 +19,10 @@
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\"",
     "build-server": "yarn workspace @nasa-project/server build",
     "build-client": "yarn workspace @nasa-project/client build",
-    "deploy": "concurrently --kill-others-on-fail \"yarn build-client\"  \"yarn server\""
+    "deploy": "concurrently --kill-others-on-fail \"yarn build-client\"  \"yarn server\"",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint --ext js,jsx,ts,tsx --fix --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|json|md)\" --write"
   },
   "dependencies": {
     "concurrently": "^6.2.0"
