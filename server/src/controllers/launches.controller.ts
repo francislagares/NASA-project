@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ILaunches } from 'types/launches';
+import { ILaunches } from '../types/launches';
 import { getAllLaunches, addNewLaunch } from '../models/launches.model';
 
 function httpGetAllLaunches(req: Request, res: Response): void {

@@ -1,10 +1,11 @@
 import parse from 'csv-parse';
 import fs from 'fs';
 import path from 'path';
+import { IPlanet } from '../types/planets';
 
 export const habitablePlanets: string[] = [];
 
-function isHabitablePlanet(planet: string) {
+function isHabitablePlanet(planet: IPlanet) {
   return (
     planet['koi_disposition'] === 'CONFIRMED' &&
     planet['koi_insol'] > 0.36 &&
@@ -35,7 +36,7 @@ export function loadPlanetsData(): Promise<void> {
       })
       .on('end', () => {
         console.log(
-          habitablePlanets.map(planet => {
+          habitablePlanets.map((planet: any) => {
             return planet['kepler_name'];
           }),
         );

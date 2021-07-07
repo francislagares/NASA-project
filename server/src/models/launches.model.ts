@@ -1,4 +1,4 @@
-import { ILaunches } from 'types/launches';
+import { ILaunches } from '../types/launches';
 
 const launches = new Map();
 
