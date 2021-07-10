@@ -35,11 +35,6 @@ export function loadPlanetsData(): Promise<void> {
         reject();
       })
       .on('end', () => {
-        console.log(
-          habitablePlanets.map((planet: any) => {
-            return planet['kepler_name'];
-          }),
-        );
         console.log(`${habitablePlanets.length} habitable planets found!`);
         resolve();
       });
