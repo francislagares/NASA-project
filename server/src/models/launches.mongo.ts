@@ -34,4 +34,4 @@ const launchesSchema: Schema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model<ILaunches>('Launches', launchesSchema);
+export default mongoose.model<ILaunches>('Launch', launchesSchema);
