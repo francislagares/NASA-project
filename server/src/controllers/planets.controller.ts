@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
+import { IPlanet } from '../types/planets';
 import { getAllPlanets } from '../models/planets.model';
 
-function httpGetAllPlanets(req: Request, res: Response): Response<string[]> {
+async function httpGetAllPlanets(
+  req: Request,
+  res: Response,
+): Promise<Response<IPlanet>> {
   if (!req.body) {
     res.status(400).json({
       success: false,
@@ -9,7 +13,7 @@ function httpGetAllPlanets(req: Request, res: Response): Response<string[]> {
     });
   }
 
-  return res.status(200).json(getAllPlanets());
+  return res.status(200).json(await getAllPlanets());
 }
 
 export { httpGetAllPlanets };

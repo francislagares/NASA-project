@@ -1,11 +1,12 @@
 import parse from 'csv-parse';
 import fs from 'fs';
 import path from 'path';
-import { IPlanet } from '../types/planets';
+import planets from './planets.mongo';
+import { IPlanetSpecs, IPlanet } from '../types/planets';
 
 export const habitablePlanets: string[] = [];
 
-function isHabitablePlanet(planet: IPlanet) {
+function isHabitablePlanet(planet: IPlanetSpecs) {
   return (
     planet['koi_disposition'] === 'CONFIRMED' &&
     planet['koi_insol'] > 0.36 &&
@@ -25,9 +26,11 @@ export function loadPlanetsData(): Promise<void> {
           columns: true,
         }),
       )
-      .on('data', data => {
+      .on('data', async data => {
         if (isHabitablePlanet(data)) {
-          habitablePlanets.push(data);
+          await planets.create({
+            keplerName: data.kepler_name,
+          });
         }
       })
       .on('error', err => {
@@ -41,8 +44,8 @@ export function loadPlanetsData(): Promise<void> {
   });
 }
 
-export function getAllPlanets(): string[] {
-  return habitablePlanets;
+export async function getAllPlanets(): Promise<IPlanet[]> {
+  return await planets.find({});
 }
 
 module.exports = {
