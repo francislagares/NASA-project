@@ -4,8 +4,6 @@ import path from 'path';
 import planets from './planets.mongo';
 import { IPlanetSpecs, IPlanet } from '../types/planets';
 
-export const habitablePlanets: string[] = [];
-
 function isHabitablePlanet(planet: IPlanetSpecs) {
   return (
     planet['koi_disposition'] === 'CONFIRMED' &&
@@ -37,8 +35,9 @@ export function loadPlanetsData(): Promise<void> {
         console.log(err);
         reject();
       })
-      .on('end', () => {
-        console.log(`${habitablePlanets.length} habitable planets found!`);
+      .on('end', async () => {
+        const countPlanetsFound = (await getAllPlanets()).length;
+        console.log(`${countPlanetsFound} habitable planets found!`);
         resolve();
       });
   });
@@ -46,6 +45,24 @@ export function loadPlanetsData(): Promise<void> {
 
 export async function getAllPlanets(): Promise<IPlanet[]> {
   return await planets.find({});
+}
+
+export async function savePlanet(planet: any): Promise<void> {
+  try {
+    await planets.updateOne(
+      {
+        keplerName: planet.kepler_name,
+      },
+      {
+        keplerName: planet.kepler_name,
+      },
+      {
+        upsert: true,
+      },
+    );
+  } catch (error) {
+    console.error(`Could not save planet ${error}`);
+  }
 }
 
 module.exports = {
