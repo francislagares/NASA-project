@@ -1,3 +1,4 @@
+import launchesDB from './launches.mongo';
 import { ILaunches } from '../types/launches';
 
 const launches = new Map();
@@ -15,10 +16,24 @@ const launch: ILaunches = {
   success: true,
 };
 
-launches.set(launch.flightNumber, launch);
+saveLaunch(launch);
 
-function getAllLaunches(): ILaunches[] {
-  return Array.from(launches.values());
+// launches.set(launch.flightNumber, launch);
+
+async function getAllLaunches(): Promise<ILaunches[]> {
+  return await launchesDB.find({}, { _id: 0, __v: 0 });
+}
+
+async function saveLaunch(launch: ILaunches) {
+  await launchesDB.updateOne(
+    {
+      flightNumber: launch.flightNumber,
+    },
+    launch,
+    {
+      upsert: true,
+    },
+  );
 }
 
 function addNewLaunch(launch: ILaunches): void {

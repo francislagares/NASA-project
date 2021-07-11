@@ -2,7 +2,10 @@ import { Request, Response } from 'express';
 import { ILaunches } from '../types/launches';
 import { getAllLaunches, addNewLaunch } from '../models/launches.model';
 
-function httpGetAllLaunches(req: Request, res: Response): void {
+async function httpGetAllLaunches(
+  req: Request,
+  res: Response,
+): Promise<Response<ILaunches[]>> {
   if (!req.body) {
     res.status(400).json({
       success: false,
@@ -10,7 +13,7 @@ function httpGetAllLaunches(req: Request, res: Response): void {
     });
   }
 
-  res.status(200).json(getAllLaunches());
+  return res.status(200).json(await getAllLaunches());
 }
 
 function httpAddNewLaunch(req: Request, res: Response): Response<ILaunches> {
