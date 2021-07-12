@@ -9,8 +9,6 @@
     "start:dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/server.ts",
     "start": "tsc && node build/server.js",
     "build": "tsc",
-    "test:watch": "jest --watchAll --no-cache",
-    "test:ci": "jest",
     "cluster": "pm2 start -i max --interpreter none 'ts-node src/server.ts'"
   },
   "dependencies": {
