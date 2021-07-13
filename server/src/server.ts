@@ -1,5 +1,6 @@
 import { app } from './app';
 import { loadPlanetsData } from './models/planets.model';
+import { loadLaunchesData } from './models/launches.model';
 import { mongoConnect } from './services/mongodb';
 
 const createServer = async () => {

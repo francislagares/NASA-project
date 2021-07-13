@@ -3,8 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import indexRouter from '../routes';
-import planetsRouter from '../routes/planets/planets.router';
-import launchesRouter from '../routes/launches/launches.router';
+import api from '../routes/api';
 
 const app = express();
 
@@ -21,8 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 // Routes...
-app.use('/planets', planetsRouter);
-app.use('/launches', launchesRouter);
+app.use('/v1', api);
 app.use('/*', indexRouter);
 
 export { app };
