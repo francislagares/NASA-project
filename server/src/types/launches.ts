@@ -3,7 +3,7 @@ export interface ILaunches {
   mission: string;
   rocket: string;
   launchDate: Date;
-  target: string;
+  target?: string;
   customers: string[];
   upcoming: boolean;
   success: boolean;
