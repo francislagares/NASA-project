@@ -6,11 +6,15 @@ import {
   getAllLaunches,
   scheduleNewLaunch,
 } from '../models/launches.model';
+import { getPagination } from '../services/query';
 
 async function httpGetAllLaunches(
   req: Request,
   res: Response,
 ): Promise<Response<ILaunches[]>> {
+  const { skip, limit } = await getPagination(req.query);
+  const launches = await getAllLaunches(skip, limit);
+
   if (!req.body) {
     res.status(400).json({
       success: false,
@@ -18,7 +22,7 @@ async function httpGetAllLaunches(
     });
   }
 
-  return res.status(200).json(await getAllLaunches());
+  return res.status(200).json(launches);
 }
 
 async function httpAddNewLaunch(
